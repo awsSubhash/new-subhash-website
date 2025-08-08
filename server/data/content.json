@@ -1,0 +1,126 @@
+{
+  "about": "<p>AWS Cloud Engineer with 3 years of hands-on experience in architecting and automating cloud-native solutions on AWS using services like EC2, S3, Lambda, RDS, and VPC. Proficient in Infrastructure as Code (Terraform, CloudFormation), CI/CD (Jenkins, GitLab, ArgoCD), and monitoring (CloudWatch, Grafana, New Relic). AWS Certified Solutions Architect – Associate. Passionate about building scalable, secure, and cost-efficient cloud infrastructure.</p><p>Currently working at OLA, I specialize in designing high-availability applications, automating deployments, and optimizing cloud operations. I thrive in fast-paced environments and am dedicated to staying updated with the latest cloud technologies.</p>",
+  "skills": [
+    {
+      "name": "Cloud Platforms: AWS (EC2, S3, RDS, VPC, Lambda, EKS)",
+      "icon": "fa-cloud"
+    },
+    {
+      "name": "IaC & Automation: Terraform, CloudFormation, Ansible, Python",
+      "icon": "fa-code"
+    },
+    {
+      "name": "CI/CD & DevOps: Jenkins, AWS CodePipeline, GitHub, ArgoCD",
+      "icon": "fa-tools"
+    },
+    {
+      "name": "Containers: Docker, Kubernetes",
+      "icon": "fa-box"
+    },
+    {
+      "name": "Monitoring: CloudWatch, Grafana, Prometheus, New Relic",
+      "icon": "fa-chart-line"
+    },
+    {
+      "name": "Security: IAM, Security Groups, ACLs, Firewalls",
+      "icon": "fa-shield-alt"
+    },
+    {
+      "name": "Web Servers: Apache, Nginx, Tomcat",
+      "icon": "fa-server"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Scalable AWS Infrastructure",
+      "company": "OLA",
+      "duration": "September 2024 – Present",
+      "image": "https://via.placeholder.com/300x220?text=OLA+Infrastructure",
+      "description": [
+        "Designed and deployed scalable, secure AWS cloud infrastructure for high-availability applications.",
+        "Managed auto-scaling configurations to optimize performance and cost.",
+        "Monitored system health using Grafana, New Relic, and PagerDuty for real-time alerting.",
+        "Implemented custom IAM policies and security groups for compliance.",
+        "Used Terraform and CloudFormation for consistent infrastructure provisioning.",
+        "Automated tasks with Bash scripts to reduce manual intervention.",
+        "Authored detailed incident and RCA reports for outage prevention."
+      ]
+    },
+    {
+      "title": "CI/CD Pipeline Implementation",
+      "company": "Namaste Credit",
+      "duration": "January 2024 – June 2024",
+      "image": "https://via.placeholder.com/300x220?text=CI/CD+Pipeline",
+      "description": [
+        "Designed highly available infrastructure using EC2, S3, and VPC.",
+        "Automated provisioning with Terraform and CloudFormation.",
+        "Implemented CI/CD pipelines with Jenkins and AWS CodePipeline, reducing deployment time by 50%.",
+        "Configured IAM roles and security groups, conducting regular audits.",
+        "Optimized resources with CloudWatch, achieving 20% cost reduction.",
+        "Provided 24/7 support, ensuring 99.9% uptime."
+      ]
+    },
+    {
+      "title": "Cloud Migration",
+      "company": "Prestige Holiday Resorts LLP",
+      "duration": "August 2023 – January 2024",
+      "image": "https://via.placeholder.com/300x220?text=Cloud+Migration",
+      "description": [
+        "Assisted in migrating on-premises applications to AWS for improved performance.",
+        "Developed automation scripts using AWS Lambda.",
+        "Configured and managed EC2, RDS, and S3 resources.",
+        "Collaborated with teams to implement business-aligned cloud solutions."
+      ]
+    },
+    {
+      "title": "Cloud Resource Management",
+      "company": "Cordis Technology",
+      "duration": "May 2022 – July 2023",
+      "image": "https://via.placeholder.com/300x220?text=Cloud+Resources",
+      "description": [
+        "Configured AWS services and infrastructure components.",
+        "Monitored resources with CloudWatch, maintaining performance and security logs.",
+        "Performed initial troubleshooting and escalated complex issues.",
+        "Assisted in automating tasks with AWS Lambda and scripts."
+      ]
+    }
+  ],
+  "blog": [
+    {
+      "title": "Optimizing AWS Costs with Terraform",
+      "excerpt": "Learn how to use Terraform to provision cost-effective AWS infrastructure."
+    },
+    {
+      "title": "Building CI/CD Pipelines with Jenkins",
+      "excerpt": "A guide to setting up efficient CI/CD pipelines for cloud applications."
+    }
+  ],
+  "testimonials": [
+    {
+      "text": "Subhash delivered exceptional cloud solutions with great attention to detail.",
+      "author": "Project Manager, OLA"
+    },
+    {
+      "text": "Highly skilled and reliable engineer, always proactive in solving issues.",
+      "author": "Team Lead, Namaste Credit"
+    }
+  ],
+  "education": [
+    {
+      "title": "Bachelor’s Degree in Computer Application (with IMS)",
+      "institution": "Tilak University",
+      "year": "2024"
+    },
+    {
+      "title": "AWS Certified Solutions Architect – Associate",
+      "institution": "Amazon Web Services",
+      "year": "2024",
+      "validation": "9f009caa08794759aecbe8dced72fc88"
+    },
+    {
+      "title": "Diploma in Network Administration",
+      "institution": "Unknown Institution",
+      "year": "2022"
+    }
+  ]
+}
