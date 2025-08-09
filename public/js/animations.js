@@ -94,28 +94,119 @@ function animate() {
 init();
 animate();
 
+// Welcome Message Animation
+document.addEventListener('DOMContentLoaded', () => {
+    const welcomeOverlay = document.querySelector('#welcome-overlay');
+    const welcomeMessage = document.querySelector('.welcome-message');
+
+    if (welcomeOverlay && welcomeMessage) {
+        gsap.from(welcomeMessage, {
+            opacity: 0,
+            scale: 0.5,
+            y: 100,
+            duration: 1.5,
+            ease: 'power4.out',
+            onStart: () => {
+                welcomeOverlay.style.display = 'flex';
+            }
+        });
+
+        gsap.to(welcomeMessage, {
+            opacity: 0,
+            scale: 1.2,
+            duration: 1,
+            delay: 2.5,
+            ease: 'power2.in',
+            onComplete: () => {
+                gsap.to(welcomeOverlay, {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        welcomeOverlay.classList.add('hidden');
+                        welcomeOverlay.style.display = 'none';
+                    }
+                });
+            }
+        });
+    }
+
+    // Hero Text Animation
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const titleStrings = ['Subhash Kumar Singh', 'AWS Cloud Engineer'];
+    const subtitleStrings = [
+        'AWS Certified Cloud Engineer | DevOps Specialist',
+        'Architecting Scalable Cloud Solutions'
+    ];
+    let currentTitleIndex = 0;
+    let currentSubtitleIndex = 0;
+
+    function updateText(element, text, isSubtitle = false) {
+        element.innerHTML = text + '<span class="custom-cursor"></span>';
+        if (!isSubtitle) {
+            const gradientIndex = currentTitleIndex % 2;
+            element.style.background = gradientIndex === 0
+                ? 'linear-gradient(90deg, #fff, #ff9900)'
+                : 'linear-gradient(90deg, #fff, #e68a00)';
+            element.style.webkitBackgroundClip = 'text';
+            element.style.backgroundClip = 'text';
+            element.style.color = 'transparent';
+        } else {
+            element.style.color = '#d0d0d0';
+        }
+    }
+
+    function animateText(element, text, delay, isSubtitle = false) {
+        updateText(element, text, isSubtitle);
+        gsap.fromTo(element, 
+            { opacity: 0.3, textShadow: '0 0 10px rgba(255, 153, 0, 0.3)' },
+            {
+                opacity: 1,
+                textShadow: '0 0 15px rgba(255, 153, 0, 0.7)',
+                duration: 0.6,
+                ease: 'power2.inOut',
+                repeat: 4,
+                yoyo: true,
+                delay: delay,
+                onStart: () => {
+                    element.style.opacity = '1';
+                }
+            }
+        );
+        return gsap.to(element, {
+            opacity: 0,
+            textShadow: '0 0 10px rgba(255, 153, 0, 0.3)',
+            duration: 0.5,
+            ease: 'power2.in',
+            delay: delay + 3
+        });
+    }
+
+    function cycleText() {
+        const titlePromise = animateText(heroTitle, titleStrings[currentTitleIndex], 4);
+        const subtitlePromise = animateText(heroSubtitle, subtitleStrings[currentSubtitleIndex], 4.5, true);
+
+        Promise.all([titlePromise, subtitlePromise]).then(() => {
+            currentTitleIndex = (currentTitleIndex + 1) % titleStrings.length;
+            currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitleStrings.length;
+            setTimeout(cycleText, 1000); // 1s pause between cycles
+        });
+    }
+
+    if (heroTitle && heroSubtitle) {
+        heroTitle.style.opacity = '0';
+        heroSubtitle.style.opacity = '0';
+        cycleText();
+    }
+});
+
 // GSAP Animations
-gsap.from(".hero-title", {
-    opacity: 0,
-    y: 70,
-    duration: 1.2,
-    delay: 0.3,
-    ease: "power4.out"
-});
-
-gsap.from(".hero-subtitle", {
-    opacity: 0,
-    y: 70,
-    duration: 1.2,
-    delay: 0.5,
-    ease: "power4.out"
-});
-
 gsap.from(".btn", {
     opacity: 0,
     scale: 0.7,
     duration: 1.5,
-    delay: 0.7,
+    delay: 4.5,
     ease: "elastic.out(1, 0.4)"
 });
 
@@ -213,5 +304,6 @@ gsap.from(".contact h2, .contact form > *, .contact-info", {
 gsap.from("nav", {
     y: -100,
     duration: 1.2,
+    delay: 4,
     ease: "power4.out"
 });
