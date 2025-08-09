@@ -13,10 +13,14 @@
     <link rel="icon" href="/assets/favicon.ico">
 </head>
 <body>
+    <div id="welcome-overlay" class="welcome-overlay">
+        <h1 class="welcome-message">Welcome to Subhash Kumar Singh's Portfolio!</h1>
+    </div>
     <canvas id="particle-canvas"></canvas>
     <nav>
         <div class="logo">Subhash Kumar Singh</div>
-        <ul>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -97,7 +101,8 @@
         </div>
     </div>
 
-    <!-- Tawk.to Chat Widget -->
+    <!-- Tawk.to Chat Widget and Typed.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
