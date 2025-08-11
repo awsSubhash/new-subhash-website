@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Navigation Toggle (for mobile if added later)
+    // Navigation Toggle (for mobile)
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('nav ul');
     if (hamburger) {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
-        
+
         try {
             const response = await fetch('/api/contact', {
                 method: 'POST',
@@ -70,6 +70,88 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error logging in. Please try again.');
         }
     });
+
+    // Tawk.to Page Navigation Tracking
+    function updateTawkToPage(section) {
+        const sectionNames = {
+            'home': 'Home',
+            'about': 'About',
+            'skills': 'Skills',
+            'projects': 'Projects',
+            'blog': 'Blog',
+            'testimonials': 'Testimonials',
+            'education': 'Education',
+            'contact': 'Contact'
+        };
+        const pageName = sectionNames[section] || 'Unknown Section';
+        
+        // Use addEvent for navigation tracking
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.addEvent) {
+            Tawk_API.addEvent('page-navigation', { page: pageName }, (error) => {
+                if (error) {
+                    console.error('Tawk.to addEvent error:', error);
+                } else {
+                    console.log(`Tawk.to event sent: Navigated to ${pageName}`);
+                }
+            });
+            
+            // Also update visitor attributes
+            Tawk_API.setAttributes({
+                currentPage: pageName
+            }, (error) => {
+                if (error) {
+                    console.error('Tawk.to setAttributes error:', error);
+                } else {
+                    console.log(`Tawk.to attribute updated: currentPage = ${pageName}`);
+                }
+            });
+        } else {
+            console.warn('Tawk_API not available, retrying...');
+            // Retry after a delay
+            setTimeout(() => updateTawkToPage(section), 1000);
+        }
+    }
+
+    // Wait for Tawk.to to load
+    function waitForTawkTo(callback) {
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.onLoad) {
+            Tawk_API.onLoad = () => {
+                console.log('Tawk.to loaded successfully');
+                callback();
+            };
+        } else {
+            console.log('Waiting for Tawk.to to load...');
+            setTimeout(() => waitForTawkTo(callback), 500);
+        }
+    }
+
+    // Track hash changes
+    window.addEventListener('hashchange', () => {
+        const section = window.location.hash.replace('#', '') || 'home';
+        updateTawkToPage(section);
+    });
+
+    // Track initial page load
+    waitForTawkTo(() => {
+        const initialSection = window.location.hash.replace('#', '') || 'home';
+        updateTawkToPage(initialSection);
+    });
+
+    // Track section visibility with ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+    const sections = ['home', 'about', 'skills', 'projects', 'blog', 'testimonials', 'education', 'contact'];
+    sections.forEach(section => {
+        const element = document.getElementById(section);
+        if (element) {
+            ScrollTrigger.create({
+                trigger: element,
+                start: 'top center',
+                end: 'bottom center',
+                onEnter: () => updateTawkToPage(section),
+                onEnterBack: () => updateTawkToPage(section)
+            });
+        }
+    });
 });
 
 async function fetchContentWithRetry(maxRetries, retryDelay = 1000) {
@@ -80,7 +162,7 @@ async function fetchContentWithRetry(maxRetries, retryDelay = 1000) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            
+
             // Render About
             const aboutContent = document.getElementById('about-content');
             if (aboutContent) {
