@@ -94,12 +94,14 @@ function animate() {
 init();
 animate();
 
-// Welcome Message Animation
+// Welcome Message and Button Animation
 document.addEventListener('DOMContentLoaded', () => {
     const welcomeOverlay = document.querySelector('#welcome-overlay');
     const welcomeMessage = document.querySelector('.welcome-message');
+    const letsGoBtn = document.querySelector('#lets-go-btn');
 
-    if (welcomeOverlay && welcomeMessage) {
+    if (welcomeOverlay && welcomeMessage && letsGoBtn) {
+        // Initial animation for welcome message
         gsap.from(welcomeMessage, {
             opacity: 0,
             scale: 0.5,
@@ -111,23 +113,54 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        gsap.to(welcomeMessage, {
+        // Initial animation for button
+        gsap.from(letsGoBtn, {
             opacity: 0,
-            scale: 1.2,
-            duration: 1,
-            delay: 2.5,
-            ease: 'power2.in',
-            onComplete: () => {
-                gsap.to(welcomeOverlay, {
-                    opacity: 0,
-                    duration: 0.5,
-                    ease: 'power2.out',
-                    onComplete: () => {
-                        welcomeOverlay.classList.add('hidden');
-                        welcomeOverlay.style.display = 'none';
-                    }
-                });
+            scale: 0.7,
+            y: 50,
+            duration: 1.5,
+            delay: 0.5,
+            ease: 'elastic.out(1, 0.4)'
+        });
+
+        // Button click handler
+        letsGoBtn.addEventListener('click', () => {
+            // Enhance particle animation on click
+            for (let i = 0; i < 50; i++) {
+                particlesArray.push(new Particle());
             }
+
+            // Animate button on click
+            gsap.to(letsGoBtn, {
+                scale: 0.8,
+                duration: 0.2,
+                ease: 'power2.in',
+                onComplete: () => {
+                    gsap.to(letsGoBtn, {
+                        scale: 1,
+                        duration: 0.2,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+
+            // Animate welcome overlay out
+            gsap.to(welcomeMessage, {
+                opacity: 0,
+                scale: 1.2,
+                duration: 0.8,
+                ease: 'power2.in'
+            });
+
+            gsap.to(welcomeOverlay, {
+                opacity: 0,
+                duration: 1,
+                ease: 'power2.out',
+                onComplete: () => {
+                    welcomeOverlay.classList.add('hidden');
+                    welcomeOverlay.style.display = 'none';
+                }
+            });
         });
     }
 
@@ -159,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animateText(element, text, delay, isSubtitle = false) {
         updateText(element, text, isSubtitle);
-        gsap.fromTo(element, 
+        gsap.fromTo(element,
             { opacity: 0.3, textShadow: '0 0 10px rgba(255, 153, 0, 0.3)' },
             {
                 opacity: 1,

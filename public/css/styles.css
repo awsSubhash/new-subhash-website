@@ -32,6 +32,7 @@ body {
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(12px);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2000;
@@ -53,6 +54,49 @@ body {
     background-clip: text;
     color: transparent;
     padding: 20px;
+}
+
+.lets-go-btn {
+    margin-top: 30px;
+    padding: 15px 40px;
+    background: linear-gradient(90deg, #ff9900, #e68a00);
+    border: none;
+    border-radius: 50px;
+    color: #0a0a0a;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+    animation: blink-button 1.5s infinite;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lets-go-btn i.fa-arrow-right {
+    color: #fff;
+    font-size: 1.4rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    animation: pulse-arrow 1s infinite;
+}
+
+@keyframes blink-button {
+    0% { box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(255, 153, 0, 0.7); }
+    100% { box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3); }
+}
+
+@keyframes pulse-arrow {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+.lets-go-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(255, 153, 0, 0.5);
+    animation: none;
 }
 
 nav {
@@ -432,6 +476,15 @@ footer {
     .welcome-message {
         font-size: 2.5rem;
         padding: 15px;
+    }
+
+    .lets-go-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .lets-go-btn i.fa-arrow-right {
+        font-size: 1.2rem;
     }
 
     .about, .skills, .projects, .blog, .testimonials, .education, .contact {
