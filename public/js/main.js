@@ -2,9 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Navigation Toggle (for mobile)
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('nav ul');
-    if (hamburger) {
+    const navItems = document.querySelectorAll('nav ul.nav-links li a');
+
+    if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a nav item is clicked
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
     }
 
