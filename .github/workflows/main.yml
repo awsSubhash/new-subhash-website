@@ -20,5 +20,5 @@ jobs:
             git config --global --add safe.directory /home/ec2-user/new-subhash-website
             cd /home/ec2-user/new-subhash-website
             git pull origin main
-            sudo npm install --production
-            sudo pm2 restart node-app || sudo pm2 start app.js --name node-app
+            npm install --production
+            pm2 restart "my app" || pm2 start server/index.js --name "my app"
