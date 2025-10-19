@@ -1,4 +1,19 @@
 name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: SSH to EC2 and deploy Node.js app
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -7,7 +22,6 @@ name: Deploy to EC2
           script: |
             # Allow Git in safe directory
             git config --global --add safe.directory /home/ec2-user/new-subhash-website
-
             # Install Node.js if not found
             if ! command -v node &> /dev/null
             then
@@ -15,14 +29,12 @@ name: Deploy to EC2
               curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
               sudo yum install -y nodejs
             fi
-
             # Install PM2 if not found
             if ! command -v pm2 &> /dev/null
             then
               echo "PM2 not found, installing..."
               sudo npm install -g pm2
             fi
-
             # Go to project directory and deploy
             cd /home/ec2-user/new-subhash-website
             git pull origin main
